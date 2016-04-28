@@ -1,16 +1,14 @@
 package com.google.mail.pages;
 
-import org.openqa.selenium.By;
+import com.google.mail.core.BasePage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 
 public class GmailPage extends BasePage {
 
-    public GmailPage(WebDriver driver, long timeout) {
-        super(driver, timeout);
+    public GmailPage(WebDriver driver) {
+        super(driver);
     }
 
     public void visit() {
@@ -19,8 +17,10 @@ public class GmailPage extends BasePage {
 
     public void login(String email, String password) {
 
-        wait.until(visibilityOfElementLocated(By.cssSelector("#Email"))).sendKeys(email + Keys.ENTER);
-        wait.until(visibilityOfElementLocated(By.cssSelector("#Passwd"))).sendKeys(password + Keys.ENTER);
+        $("#Email").sendKeys(email + Keys.ENTER);
+        $("#Passwd").sendKeys(password + Keys.ENTER);
+
     }
+
 
 }

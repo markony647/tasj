@@ -8,18 +8,16 @@ import com.google.mail.pages.MenuPage;
 
 import java.util.Date;
 
-import static com.google.mail.testconfigs.TestConfigs.timeOutInSeconds;
-
 
 public class GmailTest extends BaseTest {
 
-    GmailPage gmailPage = new GmailPage(driver, timeOutInSeconds);
-    MailPage mailPage = new MailPage(driver, timeOutInSeconds);
-    MenuPage menuPage = new MenuPage(driver, timeOutInSeconds);
-
+    GmailPage gmailPage = new GmailPage(driver);
+    MailPage mailPage = new MailPage(driver);
+    MenuPage menuPage = new MenuPage(driver);
 
     @Test
     public void testLoginSendAndSearch() {
+
         String subject = "subject " + new Date().toString();
 
         gmailPage.visit();
