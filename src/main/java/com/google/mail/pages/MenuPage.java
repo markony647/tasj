@@ -17,7 +17,8 @@ public class MenuPage extends BasePage {
     }
 
     public void goToSent() {
-        $("a[title='Sent Mail']").click();
+        $(byText("Sent Mail")).click();
+
     }
 
     public void refresh() {

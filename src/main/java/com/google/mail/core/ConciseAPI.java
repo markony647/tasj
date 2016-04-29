@@ -24,19 +24,20 @@ public abstract class ConciseAPI {
         return new WebDriverWait(getWebDriver(), timeout).until(condition);
     }
 
+    public By byCss(String selector) {
+        return By.cssSelector(selector);
+    }
+
     public WebElement $(By by) {
         return assertThat(visibilityOfElementLocated(by));
     }
 
     public WebElement $(String selector) {
-        return $(By.cssSelector(selector));
+        return $(byCss(selector));
     }
 
     public By byText(String elementText) {
-        return By.xpath(getElementText(elementText));
+        return By.xpath(".//*/text()[normalize-space(.) = " + Quotes.escape(elementText) + "]/parent::*");
     }
 
-    public String getElementText(String elementText) {
-        return "//*[text()=\"" + elementText + "\" ]";
-    }
 }

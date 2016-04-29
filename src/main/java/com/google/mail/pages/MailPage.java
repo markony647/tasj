@@ -20,7 +20,7 @@ public class MailPage extends BasePage {
         $(byText("COMPOSE")).click();
         $(By.name("to")).sendKeys(recipient + Keys.ENTER);
         $(By.name("subjectbox")).sendKeys(subjectText + Keys.ENTER);
-        $("[aria-label^='Send']").click();
+        $(byText("Send")).click();
     }
 
     public void searchBySubject(String subjectText) {
@@ -28,11 +28,10 @@ public class MailPage extends BasePage {
     }
 
     public void assertMails(String... mailsTexts) {
-        assertThat(textsOf(By.cssSelector(mails + " .y6"), mailsTexts));
+        assertThat(textsOf(byCss(mails), mailsTexts));
     }
 
     public void assertMail(int index, String subjectText) {
-        assertThat(listNthElementHasText(By.cssSelector(mails + " .y6"), index, subjectText));
+        assertThat(listNthElementHasText(byCss(mails), index, subjectText));
     }
-
 }

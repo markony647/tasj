@@ -1,72 +1,85 @@
 package com.google.mail.core;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.common.base.Function;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
-import java.util.List;
+import java.util.*;
 
 
 public class CustomConditions {
 
-    public static ExpectedCondition<Boolean> textsOf(final By locator, final String... expectedTexts) {
-        return new ExpectedCondition<Boolean>() {
+    public static ExpectedCondition<List<WebElement>> textsOf(final By locator, final String... expectedTexts) {
+        return elementExceptionsCatcher(new ExpectedCondition<List<WebElement>>() {
             private List<WebElement> elements;
+            private List<String> actualTexts;
 
-            public Boolean apply(WebDriver driver) {
-                boolean isEqualsText = false;
-                int expectedSize = expectedTexts.length;
-                if (!(driver.findElements(locator).size() == expectedSize)) {
-                    return false;
+            public List<WebElement> apply(WebDriver driver) {
+                actualTexts = new ArrayList<String>();
+                elements = driver.findElements(locator);
+
+                for (WebElement e : elements) {
+                    actualTexts.add(e.getText());
                 }
 
-                elements = driver.findElements(locator);
+                if (actualTexts.size() != expectedTexts.length) {
+                    return null;
+                }
+
                 for (int i = 0; i < expectedTexts.length; i++) {
-                    if (expectedTexts[i].equals(elements.get(i).getText())) {
-                        isEqualsText = true;
-                    } else {
-                        isEqualsText = false;
-                        break;
+                    if (!(actualTexts.get(i).contains(expectedTexts[i]))) {
+                        return null;
                     }
                 }
-                return isEqualsText;
+                return elements;
             }
 
             @Override
             public String toString() {
-                String differenceInTexts = "There is difference in text : \n";
-                String expectedSizeTexts = " ||  expected size : " + expectedTexts.length;
-                String actualSizeTexts = " ||  actual size : " + elements.size() + "\n";
-                for (int i = 0; i < expectedTexts.length; i++) {
-                    if (!(expectedTexts[i].equals(elements.get(i).getText()))) {
-                        differenceInTexts += "Expected : " + "\'" + expectedTexts[i] + "\'" + " ||  Actual : " + "\'" + elements.get(i).getText() + "\'" + "\n";
-                    }
-                }
-                return expectedSizeTexts + actualSizeTexts + "In element located : " + locator + "\n" + differenceInTexts;
+                return String.format("\n Texts mismatch \n Actual : %s \n Expected: %s \n Element located  %s", actualTexts, Arrays.toString(expectedTexts), locator);
             }
-        };
+        });
     }
 
     public static ExpectedCondition<Boolean> listNthElementHasText(final By elementsLocator, final int index, final String text) {
-        return new ExpectedCondition<Boolean>() {
+        return elementExceptionsCatcher(new ExpectedCondition<Boolean>() {
             private List<WebElement> elements;
 
             public Boolean apply(WebDriver driver) {
                 elements = driver.findElements(elementsLocator);
-
-                if (elements.get(index).getText().equals(text)) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return (elements.get(index).getText().contains(text));
             }
 
+            @Override
             public String toString() {
                 return String.format("text \'%s\' to be present in element %s but found \'%s\'", text, elementsLocator, elements.get(index).getText());
             }
-        };
+        });
     }
 
+    public static <V> ExpectedCondition<V> elementExceptionsCatcher(final Function<? super WebDriver, V> condition) {
+        return new ExpectedCondition<V>() {
+            public V apply(WebDriver driver) {
+                try {
+                    return condition.apply(driver);
+                } catch (StaleElementReferenceException e) {
+                    return null;
+                } catch (ElementNotVisibleException e) {
+                    return null;
+                } catch (IndexOutOfBoundsException e) {
+                    return null;
+                } catch (TimeoutException e) {
+                    return null;
+                } catch (NullPointerException e) {
+                    return null;
+                }
+            }
+
+            @Override
+            public String toString() {
+                return condition.toString();
+            }
+        };
+    }
 
 }
