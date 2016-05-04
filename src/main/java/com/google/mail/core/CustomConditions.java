@@ -41,18 +41,18 @@ public class CustomConditions {
         });
     }
 
-    public static ExpectedCondition<Boolean> listNthElementHasText(final By elementsLocator, final int index, final String text) {
+    public static ExpectedCondition<Boolean> listNthElementHasText(final By locator, final int index, final String expectedText) {
         return elementExceptionsCatcher(new ExpectedCondition<Boolean>() {
-            private List<WebElement> elements;
+            private String actualText;
 
             public Boolean apply(WebDriver driver) {
-                elements = driver.findElements(elementsLocator);
-                return (elements.get(index).getText().contains(text));
+                actualText = driver.findElements(locator).get(index).getText();
+                return actualText.contains(expectedText);
             }
 
             @Override
             public String toString() {
-                return String.format("text \'%s\' to be present in element %s but found \'%s\'", text, elementsLocator, elements.get(index).getText());
+                return String.format("text \'%s\' to be present in element %s but found \'%s\'", expectedText, locator, actualText);
             }
         });
     }
@@ -62,15 +62,7 @@ public class CustomConditions {
             public V apply(WebDriver driver) {
                 try {
                     return condition.apply(driver);
-                } catch (StaleElementReferenceException e) {
-                    return null;
-                } catch (ElementNotVisibleException e) {
-                    return null;
-                } catch (IndexOutOfBoundsException e) {
-                    return null;
-                } catch (TimeoutException e) {
-                    return null;
-                } catch (NullPointerException e) {
+                } catch (Exception e) {
                     return null;
                 }
             }
