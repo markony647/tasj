@@ -8,35 +8,46 @@ import org.openqa.selenium.support.ui.*;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
-public abstract class ConciseAPI {
+public class ConciseAPI {
+    private static WebDriver driver;
 
-    public abstract WebDriver getWebDriver();
+    public static WebDriver getWebDriver() {
+        return driver;
+    }
 
-    public void open(String url) {
+    public static void setWebDriver(WebDriver drivers) {
+         driver = drivers;
+    }
+
+    public  ConciseAPI() {
+        System.out.println("Concise API ");
+    }
+
+    public static void open(String url) {
         getWebDriver().get(url);
     }
 
-    public <T> T assertThat(ExpectedCondition<T> condition) {
+    public static <T> T assertThat(ExpectedCondition<T> condition) {
         return assertThat(condition, Configuration.timeout);
     }
 
-    public <T> T assertThat(ExpectedCondition<T> condition, long timeout) {
+    public static <T> T assertThat(ExpectedCondition<T> condition, long timeout) {
         return new WebDriverWait(getWebDriver(), timeout).until(condition);
     }
 
-    public By byCss(String selector) {
+    public static By byCss(String selector) {
         return By.cssSelector(selector);
     }
 
-    public WebElement $(By by) {
+    public static WebElement $(By by) {
         return assertThat(visibilityOfElementLocated(by));
     }
 
-    public WebElement $(String selector) {
+    public static WebElement $(String selector) {
         return $(byCss(selector));
     }
 
-    public By byText(String elementText) {
+    public static By byText(String elementText) {
         return By.xpath(".//*/text()[normalize-space(.) = " + Quotes.escape(elementText) + "]/parent::*");
     }
 

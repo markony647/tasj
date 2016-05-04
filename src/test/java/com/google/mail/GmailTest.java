@@ -1,40 +1,36 @@
 package com.google.mail;
 
+import com.google.mail.pages.Gmail;
+import com.google.mail.pages.Mail;
+import com.google.mail.pages.Menu;
 import com.google.mail.testdata.TestData;
 import org.junit.Test;
-import com.google.mail.pages.GmailPage;
-import com.google.mail.pages.MailPage;
-import com.google.mail.pages.MenuPage;
 
 import java.util.Date;
 
 
 public class GmailTest extends BaseTest {
 
-    GmailPage gmailPage = new GmailPage(driver);
-    MailPage mailPage = new MailPage(driver);
-    MenuPage menuPage = new MenuPage(driver);
-
     @Test
     public void testLoginSendAndSearch() {
 
         String subject = "subject " + new Date().toString();
 
-        gmailPage.visit();
-        gmailPage.login(TestData.email, TestData.password);
+        Gmail.visit();
+        Gmail.login(TestData.email, TestData.password);
 
-        mailPage.send(TestData.email, subject);
+        Mail.send(TestData.email, subject);
 
-        menuPage.refresh();
+        Menu.refresh();
 
-        menuPage.goToInbox();
-        mailPage.assertMail(0, subject);
+        Menu.goToInbox();
+        Mail.assertMail(0, subject);
 
-        menuPage.goToSent();
-        mailPage.assertMail(0, subject);
+        Menu.goToSent();
+        Mail.assertMail(0, subject);
 
-        menuPage.goToInbox();
-        mailPage.searchBySubject(subject);
-        mailPage.assertMails(subject);
+        Menu.goToInbox();
+        Mail.searchBySubject(subject);
+        Mail.assertMails(subject);
     }
 }

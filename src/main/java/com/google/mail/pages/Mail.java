@@ -10,6 +10,9 @@ import static com.google.mail.core.CustomConditions.*;
 public class Mail {
     public static String mails = "[gh='tl'] .zA";
 
+    public Mail() {
+        System.out.println("Mail Constructor");
+    }
 
     public static void send(String recipient, String subjectText) {
         $(byText("COMPOSE")).click();
