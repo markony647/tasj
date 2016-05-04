@@ -28,7 +28,7 @@ public class GmailTest extends BaseTest {
         menuPage.refresh();
 
         menuPage.goToInbox();
-        mailPage.assertMail(0, subject);
+        mailPage.assertMail(1, subject);
 
         menuPage.goToSent();
         mailPage.assertMail(0, subject);
