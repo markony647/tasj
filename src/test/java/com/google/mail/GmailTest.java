@@ -33,27 +33,4 @@ public class GmailTest extends BaseTest {
         Mail.searchBySubject(subject);
         Mail.assertMails(subject);
     }
-
-    @Test
-    public void testLoginSendAndSearch2() {
-
-        String subject = "subject " + new Date().toString();
-
-        Gmail.visit();
-        Gmail.login(TestData.email, TestData.password);
-
-        Mail.send(TestData.email, subject);
-
-        Menu.refresh();
-
-        Menu.goToInbox();
-        Mail.assertMail(0, subject);
-
-        Menu.goToSent();
-        Mail.assertMail(0, subject);
-
-        Menu.goToInbox();
-        Mail.searchBySubject(subject);
-        Mail.assertMails(subject);
-    }
 }
