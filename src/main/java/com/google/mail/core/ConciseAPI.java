@@ -15,12 +15,8 @@ public class ConciseAPI {
         return driver;
     }
 
-    public static void setWebDriver(WebDriver drivers) {
-         driver = drivers;
-    }
-
-    public  ConciseAPI() {
-        System.out.println("Concise API ");
+    public static void setWebDriver(WebDriver input) {
+        driver = input;
     }
 
     public static void open(String url) {

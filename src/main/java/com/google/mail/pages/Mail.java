@@ -10,10 +10,6 @@ import static com.google.mail.core.CustomConditions.*;
 public class Mail {
     public static String mails = "[gh='tl'] .zA";
 
-    public Mail() {
-        System.out.println("Mail Constructor");
-    }
-
     public static void send(String recipient, String subjectText) {
         $(byText("COMPOSE")).click();
         $(By.name("to")).sendKeys(recipient + Keys.ENTER);
@@ -32,5 +28,4 @@ public class Mail {
     public static void assertMail(int index, String subjectText) {
         assertThat(listNthElementHasText(byCss(mails), index, subjectText));
     }
-
 }
