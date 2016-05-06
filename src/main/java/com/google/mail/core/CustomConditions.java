@@ -52,7 +52,7 @@ public class CustomConditions {
 
             @Override
             public String toString() {
-                return String.format("text \'%s\' to be present in element %s but found \'%s\'", expectedText, locator, actualText);
+                return String.format("text \'%s\' \n in element located \'%s\' \n but found: \'%s\'", expectedText, locator, actualText);
             }
         });
     }
@@ -62,7 +62,7 @@ public class CustomConditions {
             public V apply(WebDriver driver) {
                 try {
                     return condition.apply(driver);
-                } catch (Exception e) {
+                } catch (StaleElementReferenceException | ElementNotVisibleException | IndexOutOfBoundsException e)    {
                     return null;
                 }
             }

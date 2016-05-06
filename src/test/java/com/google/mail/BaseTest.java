@@ -13,7 +13,7 @@ public class BaseTest {
 
     @Before
     public void setup() {
-        setWebDriver(new FirefoxDriver());         // Инстанс драйвера создаю здесь , или всё таки лучше вынести в поле Configuration класса ?
+        setWebDriver(new FirefoxDriver());
         Configuration.timeout = 20;
     }
 
