@@ -14,7 +14,7 @@ public class BaseTest {
     @Before
     public void setup() {
         setWebDriver(new FirefoxDriver());
-        Configuration.timeout = 20;
+        Configuration.timeoutMs = 20000;
     }
 
     @After

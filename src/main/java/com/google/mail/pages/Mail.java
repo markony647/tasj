@@ -4,7 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 import static com.google.mail.core.ConciseAPI.*;
-import static com.google.mail.core.CustomConditions.*;
+import static com.google.mail.core.Conditions.nthElementHasText;
+import static com.google.mail.core.Conditions.texts;
 
 
 public class Mail {
@@ -22,10 +23,10 @@ public class Mail {
     }
 
     public static void assertMails(String... mailsTexts) {
-        assertThat(textsOf(byCss(mails), mailsTexts));
+        assertThat(byCss(mails), texts(mailsTexts));
     }
 
     public static void assertMail(int index, String subjectText) {
-        assertThat(listNthElementHasText(byCss(mails), index, subjectText));
+        assertThat(byCss(mails), nthElementHasText(index, subjectText));
     }
 }

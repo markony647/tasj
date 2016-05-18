@@ -4,6 +4,7 @@ import org.openqa.selenium.Keys;
 
 import static com.google.mail.core.ConciseAPI.$;
 import static com.google.mail.core.ConciseAPI.open;
+import static com.google.mail.core.ConciseAPI.setValue;
 
 
 public class Gmail {
@@ -14,7 +15,7 @@ public class Gmail {
     }
 
     public static void login(String email, String password) {
-        $("#Email").sendKeys(email + Keys.ENTER);
-        $("#Passwd").sendKeys(password + Keys.ENTER);
+        setValue($("#Email"),email+Keys.ENTER) ;
+        setValue($("#Passwd"),password+Keys.ENTER) ;
     }
 }
