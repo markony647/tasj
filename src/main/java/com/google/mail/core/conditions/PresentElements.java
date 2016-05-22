@@ -5,17 +5,15 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+
 public class PresentElements extends CollectionCondition {
 
     @Override
     public List<WebElement> check(List<WebElement> entity) {
 
-        for (WebElement element : entity) {
-            if (entity.size() > 0) {
-                return entity;
-            }
+        if (entity.size() > 0) {
+            return entity;
         }
-
         return null;
     }
 
