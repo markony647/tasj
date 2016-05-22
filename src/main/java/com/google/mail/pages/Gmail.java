@@ -15,7 +15,7 @@ public class Gmail {
     }
 
     public static void login(String email, String password) {
-        setValue($("#Email"),email+Keys.ENTER) ;
-        setValue($("#Passwd"),password+Keys.ENTER) ;
+        setValue($("#Email"), email + Keys.ENTER);
+        setValue($("#Passwd"), password + Keys.ENTER);
     }
 }
