@@ -1,5 +1,6 @@
 package com.google.mail.core.conditions;
 
+import com.google.mail.core.conditions.conditions.Texts;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -11,12 +12,5 @@ public class CollectionConditions {
         return new Texts(expectedTexts);
     }
 
-    public static Condition<List<WebElement>> visible() {
-        return new VisibilityOfElements();
-    }
-
-    public static Condition<List<WebElement>> presenceOfElements() {
-        return new PresentElements();
-    }
 
 }

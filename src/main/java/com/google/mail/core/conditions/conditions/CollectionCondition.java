@@ -1,5 +1,6 @@
-package com.google.mail.core.conditions;
+package com.google.mail.core.conditions.conditions;
 
+import com.google.mail.core.conditions.AbstractCondition;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -12,13 +13,5 @@ public abstract class CollectionCondition extends AbstractCondition<List<WebElem
     @Override
     public List<WebElement> getWrappedEntity() {
         return getWebDriver().findElements(locator);
-    }
-
-    public String getWebEntityDescription() {
-        return "Elements: " + getElementsDescription();
-    }
-
-    public String getElementsDescription() {
-        return getWrappedEntity().toString();
     }
 }

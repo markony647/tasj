@@ -1,9 +1,10 @@
 package com.google.mail.core.conditions;
 
+import com.google.mail.core.conditions.ex.DescribesResult;
 import org.openqa.selenium.*;
 
 
-public abstract class AbstractCondition<T> implements Condition<T> {
+public abstract class AbstractCondition<T> implements Condition<T>, DescribesResult {
 
 
     protected By locator;
@@ -12,18 +13,10 @@ public abstract class AbstractCondition<T> implements Condition<T> {
 
     public abstract T getWrappedEntity();
 
-    public abstract String getWebEntityDescription();
-
-    public abstract String getExpectedResult();
-
-    public abstract String getActualResult();
-
     @Override
     public String toString() {
-        return "\n" +
-                "for " + getWebEntityDescription() + "\nFound by: " + locator +
-                "\nExpected :" + getExpectedResult() +
-                "\nActual : " + getActualResult();
+        return "\nExpected :" + expected() +
+                "\nActual : " + actual();
     }
 
     public T apply(By locator) {

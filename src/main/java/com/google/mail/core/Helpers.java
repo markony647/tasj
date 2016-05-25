@@ -17,11 +17,4 @@ public class Helpers {
 
         return listTexts;
     }
-
-    public static String getString(List<String> texts) {
-        for (String text : texts) {
-            return text;
-        }
-        return "";
-    }
 }
