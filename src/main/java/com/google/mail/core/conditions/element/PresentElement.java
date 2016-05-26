@@ -4,25 +4,21 @@ import org.openqa.selenium.WebElement;
 
 
 public class PresentElement extends ElementCondition {
-    private WebElement element;
+    private boolean result;
 
     @Override
-    public WebElement check(WebElement e) {
-        this.element = e;
-
-        if (element != null) {
-            return element;
-        }
-        return null;
+    public WebElement check(WebElement element) {
+        result = (element != null);
+        return element;
     }
 
     @Override
     public String expected() {
-        return " present";
+        return "present";
     }
 
     @Override
     public String actual() {
-        return String.valueOf(element);
+        return result ? "present" : "not present";
     }
 }

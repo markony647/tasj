@@ -4,14 +4,12 @@ package com.google.mail.core;
 public class Configuration {
 
     /**
-     * Timeout in milliseconds, uses to fail test when condition not met
-     * Default value: 4000 milliseconds
+     * default interval for WaitFor.Until - smart waiting check one condition, in milliseconds
      */
     public static long timeoutMs = 4000;
 
     /**
-     * Interval in milliseconds, uses to check whether element is appeared
-     * Default value: 100 milliseconds
+     * default interval between checks inside WaitFor.Until, in milliseconds
      */
     public static long pollingInterval = 100;
 }

@@ -4,25 +4,22 @@ import org.openqa.selenium.WebElement;
 
 public class VisibilityOfElement extends ElementCondition {
 
-    private WebElement element;
+    private boolean result;
 
     @Override
-    public WebElement check(WebElement e) {
-        this.element = e;
+    public WebElement check(WebElement element) {
+        result = (element != null);
 
-        if (!element.isDisplayed()) {
-            return null;
-        }
-        return element;
+        return element.isDisplayed() ? element : null;
     }
 
     @Override
     public String expected() {
-        return " visible";
+        return "visible";
     }
 
     @Override
     public String actual() {
-        return String.valueOf(element);
+        return result ? "visible" : "not visible";
     }
 }

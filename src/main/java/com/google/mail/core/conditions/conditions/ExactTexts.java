@@ -35,10 +35,7 @@ public class ExactTexts extends CollectionCondition {
     }
 
     public boolean checkElement(int index) {
-        if (!actualTexts.get(index).equals(expectedTexts[index])) {
-            return false;
-        }
-        return true;
+        return actualTexts.get(index).equals(expectedTexts[index]);
     }
 
     @Override

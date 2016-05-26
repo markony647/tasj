@@ -27,8 +27,7 @@ public class WaitFor {
         throw new TimeoutException(condition.getClass() +
                 "\nFailed while waiting for " +
                 "\nTimeout: " + Configuration.timeoutMs / 1000 + "s." +
-                condition +
-                "\nFound by: " + locator);
+                condition);
     }
 
     public static <T> T until(By locator, final Condition<T>... conditions) {

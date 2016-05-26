@@ -1,6 +1,5 @@
 package com.google.mail.core.conditions;
 
-import com.google.mail.core.conditions.ex.DescribesResult;
 import org.openqa.selenium.*;
 
 
@@ -15,8 +14,10 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
 
     @Override
     public String toString() {
-        return "\nExpected :" + expected() +
-                "\nActual : " + actual();
+        return  getClass().getSimpleName() +
+                "\nfor" + identity() + " found by: " + locator +
+                (expected() == "" ? "" : "\nexpected: " + expected()) +
+                (actual() == "" ? "" : "\nactual: " + actual());
     }
 
     public T apply(By locator) {

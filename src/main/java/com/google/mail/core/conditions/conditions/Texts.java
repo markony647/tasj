@@ -10,9 +10,6 @@ public class Texts extends ExactTexts {
 
     @Override
     public boolean checkElement(int index) {
-        if (!actualTexts.get(index).contains(expectedTexts[index])) {
-            return false;
-        }
-        return true;
+        return actualTexts.get(index).contains(expectedTexts[index]);
     }
 }

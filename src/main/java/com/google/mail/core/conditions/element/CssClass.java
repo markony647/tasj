@@ -3,9 +3,11 @@ package com.google.mail.core.conditions.element;
 
 import org.openqa.selenium.WebElement;
 
+import java.util.Arrays;
+
 public class CssClass extends ElementCondition {
     private String expectedCssClass;
-    private String actualCssClass;
+    private String[] actualCssClasses;
 
     public CssClass(String expectedCssClass) {
         this.expectedCssClass = expectedCssClass;
@@ -13,9 +15,12 @@ public class CssClass extends ElementCondition {
 
     @Override
     public WebElement check(WebElement element) {
-        actualCssClass = element.getAttribute("class");
-        if (!expectedCssClass.equals(actualCssClass)) {
-            return null;
+        actualCssClasses = element.getAttribute("class").split(" ");
+
+        for (int i = 0; i < actualCssClasses.length; i++) {
+            if (!expectedCssClass.equals(actualCssClasses[i])) {
+                return null;
+            }
         }
         return element;
     }
@@ -27,6 +32,6 @@ public class CssClass extends ElementCondition {
 
     @Override
     public String actual() {
-        return actualCssClass;
+        return Arrays.toString(actualCssClasses);
     }
 }

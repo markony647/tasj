@@ -14,4 +14,9 @@ public abstract class CollectionCondition extends AbstractCondition<List<WebElem
     public List<WebElement> getWrappedEntity() {
         return getWebDriver().findElements(locator);
     }
+
+    @Override
+    public String identity() {
+        return " elements";
+    }
 }
