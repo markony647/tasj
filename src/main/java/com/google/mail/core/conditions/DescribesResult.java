@@ -1,4 +1,4 @@
-package com.google.mail.core.conditions.ex;
+package com.google.mail.core.conditions;
 
 /**
  * Created by Valentyn on 5/24/2016.
