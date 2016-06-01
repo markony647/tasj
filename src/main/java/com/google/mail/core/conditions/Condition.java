@@ -1,6 +1,6 @@
 package com.google.mail.core.conditions;
 
-import com.google.mail.core.base.LazyEntity;
+import com.google.mail.core.LazyEntity;
 
 
 public interface Condition<T> {

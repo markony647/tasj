@@ -1,7 +1,6 @@
-package com.google.mail.core.base;
+package com.google.mail.core;
 
 
-import com.google.mail.core.WaitFor;
 import com.google.mail.core.conditions.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,17 +14,21 @@ public class Collection implements LazyCollection {
     private final By locator;
 
     public Collection(By locator) {
-      this.locator=locator;
-  }
+        this.locator = locator;
+    }
 
     @Override
     public LazyCollection shouldHave(Condition<List<WebElement>>... condition) {
-        WaitFor.until(this,condition);
+        WaitFor.until(this, condition);
         return this;
     }
 
     @Override
     public List<WebElement> getWrappedEntity() {
         return getWebDriver().findElements(locator);
+    }
+
+    public String toString() {
+        return "\n" + locator;
     }
 }

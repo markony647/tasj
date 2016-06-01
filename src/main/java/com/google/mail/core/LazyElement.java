@@ -1,4 +1,4 @@
-package com.google.mail.core.base;
+package com.google.mail.core;
 
 import com.google.mail.core.conditions.Condition;
 import org.openqa.selenium.*;

@@ -1,10 +1,6 @@
 package com.google.mail.core;
 
 
-import com.google.mail.core.base.Collection;
-import com.google.mail.core.base.Element;
-import com.google.mail.core.base.LazyCollection;
-import com.google.mail.core.base.LazyElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -30,7 +26,6 @@ public class ConciseAPI {
     public static void open(String url) {
         getWebDriver().get(url);
     }
-
 
     public static LazyElement $(By locator) {
         return new Element(locator);
@@ -64,6 +59,4 @@ public class ConciseAPI {
     public static void executeJavaScript(String jsScript) {
         ((JavascriptExecutor) getWebDriver()).executeScript(jsScript);
     }
-
-
 }

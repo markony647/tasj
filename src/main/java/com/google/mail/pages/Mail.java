@@ -1,6 +1,6 @@
 package com.google.mail.pages;
 
-import com.google.mail.core.base.LazyCollection;
+import com.google.mail.core.LazyCollection;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 

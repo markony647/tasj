@@ -1,6 +1,5 @@
-package com.google.mail.core.base;
+package com.google.mail.core;
 
-import com.google.mail.core.WaitFor;
 import com.google.mail.core.conditions.Condition;
 import org.openqa.selenium.*;
 
@@ -142,5 +141,9 @@ public class Element implements LazyElement {
 
     private WebElement getVisibleElement() {
         return WaitFor.until(this, visible());
+    }
+
+    public String toString() {
+        return "\n" + locator;
     }
 }
