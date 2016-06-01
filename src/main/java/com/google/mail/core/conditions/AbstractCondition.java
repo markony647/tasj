@@ -7,12 +7,9 @@ import org.openqa.selenium.*;
 
 public abstract class AbstractCondition<T> implements Condition<T>, DescribesResult {
 
-
     private LazyEntity lazyEntity;
 
-
     public abstract T check(T entity);
-
 
     @Override
     public String toString() {

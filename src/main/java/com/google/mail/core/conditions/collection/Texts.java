@@ -1,4 +1,4 @@
-package com.google.mail.core.conditions.conditions;
+package com.google.mail.core.conditions.collection;
 
 
 public class Texts extends ExactTexts {

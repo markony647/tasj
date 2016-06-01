@@ -1,4 +1,4 @@
-package com.google.mail.core.conditions.conditions;
+package com.google.mail.core.conditions.collection;
 
 import com.google.mail.core.conditions.AbstractCondition;
 import org.openqa.selenium.WebElement;

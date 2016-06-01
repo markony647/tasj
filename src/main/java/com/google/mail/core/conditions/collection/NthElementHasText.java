@@ -1,10 +1,11 @@
-package com.google.mail.core.conditions.conditions;
+package com.google.mail.core.conditions.collection;
 
 import org.openqa.selenium.WebElement;
-import com.google.mail.core.conditions.element.*;
+
+import java.util.List;
 
 // Отложил реализацию на будущее
-public class NthElementHasText extends ElementCondition {
+public class NthElementHasText extends CollectionCondition {
     private int index;
     private String expectedText;
 
@@ -14,8 +15,8 @@ public class NthElementHasText extends ElementCondition {
     }
 
     @Override
-    public WebElement check(WebElement element) {
-        return element;
+    public List<WebElement> check(List<WebElement> entity) {
+        return null;
     }
 
     @Override
@@ -27,6 +28,8 @@ public class NthElementHasText extends ElementCondition {
     public String actual() {
         return "";
     }
+
+
 }
 
 

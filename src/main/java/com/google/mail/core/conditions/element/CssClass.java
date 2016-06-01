@@ -18,11 +18,11 @@ public class CssClass extends ElementCondition {
         actualCssClasses = element.getAttribute("class").split(" ");
 
         for (int i = 0; i < actualCssClasses.length; i++) {
-            if (!expectedCssClass.equals(actualCssClasses[i])) {
-                return null;
+            if (expectedCssClass.equals(actualCssClasses[i])) {
+                return element;
             }
         }
-        return element;
+        return null;
     }
 
     @Override
