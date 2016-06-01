@@ -1,21 +1,23 @@
 package com.google.mail.core;
 
+import com.google.mail.core.base.LazyEntity;
 import com.google.mail.core.conditions.Condition;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.TimeoutException;
 
 
 public class WaitFor {
-    private By locator;
 
-    public WaitFor(By locator) {
-        this.locator = locator;
+    private LazyEntity lazyEntity;
+
+    public WaitFor(LazyEntity lazyEntity) {
+        this.lazyEntity = lazyEntity;
     }
 
     public <T> T until(final long timeoutMs, final Condition<T> condition) {
         final long startTime = System.currentTimeMillis();
         do {
-            T result = condition.apply(locator);
+            T result = condition.apply(lazyEntity);
             if (result == null) {
                 sleep(Configuration.pollingInterval);
                 continue;
@@ -30,10 +32,10 @@ public class WaitFor {
                 condition);
     }
 
-    public static <T> T until(By locator, final Condition<T>... conditions) {
+    public static <T> T until(LazyEntity lazyEntity, final Condition<T>... conditions) {
         T result = null;
         for (Condition<T> condition : conditions) {
-            result = new WaitFor(locator).until(Configuration.timeoutMs, condition);
+            result = new WaitFor(lazyEntity).until(Configuration.timeoutMs, condition);
         }
         return result;
     }

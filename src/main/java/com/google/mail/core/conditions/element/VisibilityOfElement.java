@@ -8,7 +8,7 @@ public class VisibilityOfElement extends ElementCondition {
 
     @Override
     public WebElement check(WebElement element) {
-        result = (element != null);
+        result = (element.isDisplayed());
 
         return element.isDisplayed() ? element : null;
     }

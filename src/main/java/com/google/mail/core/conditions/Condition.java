@@ -1,10 +1,12 @@
 package com.google.mail.core.conditions;
 
-import org.openqa.selenium.By;
+import com.google.mail.core.base.LazyEntity;
 
 
 public interface Condition<T> {
 
-    T apply(By locator);
+    T apply(LazyEntity lazyEntity);
+
 
 }
+

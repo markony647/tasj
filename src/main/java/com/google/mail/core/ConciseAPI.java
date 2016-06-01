@@ -1,11 +1,13 @@
 package com.google.mail.core;
 
 
-import com.google.mail.core.conditions.*;
+import com.google.mail.core.base.Collection;
+import com.google.mail.core.base.Element;
+import com.google.mail.core.base.LazyCollection;
+import com.google.mail.core.base.LazyElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 
@@ -30,38 +32,22 @@ public class ConciseAPI {
     }
 
 
-    public static <T> T assertThat(By locator, Condition<T>... conditions) {
-        return WaitFor.until(locator, conditions);
+    public static LazyElement $(By locator) {
+        return new Element(locator);
     }
 
-//    public static List<WebElement> $$(By by) {
-//        return assertThat(by, CollectionConditions.visible());
-//    }
-
-    public static WebElement $(By by) {
-        return assertThat(by, ElementConditions.visible());
-    }
-
-    public static WebElement $(String selector) {
+    public static LazyElement $(String selector) {
         return $(byCss(selector));
     }
 
-    public static WebElement $(By selector, Condition<WebElement>... conditions) {
-        return assertThat(selector, conditions);
+    public static LazyCollection $$(By locator) {
+        return new Collection(locator);
     }
 
-    public static WebElement $(String cssSelector, Condition<WebElement>... conditions) {
-        return $(byCss(cssSelector), conditions);
+    public static LazyCollection $$(String cssSelector) {
+        return $$(byCss(cssSelector));
     }
 
-    public static WebElement $(By parentLocator, By innerElementLocator) {
-        WebElement parentElement = $(parentLocator);
-        return parentElement.findElement(innerElementLocator);
-    }
-
-    public static WebElement $(By parentLocator, String innerElementLocator) {
-        return $(parentLocator, byCss(innerElementLocator));
-    }
 
     public static By byCss(String selector) {
         return By.cssSelector(selector);
@@ -79,20 +65,5 @@ public class ConciseAPI {
         ((JavascriptExecutor) getWebDriver()).executeScript(jsScript);
     }
 
-    public static WebElement doubleClick(WebElement element) {
-        actions().doubleClick(element).perform();
-        return element;
-    }
-
-    public static WebElement setValue(WebElement element, String text) {
-        element.clear();
-        element.sendKeys(text);
-        return element;
-    }
-
-    public static WebElement hover(WebElement element) {
-        actions().moveToElement(element).perform();
-        return element;
-    }
 
 }

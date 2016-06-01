@@ -1,36 +1,37 @@
 package com.google.mail.pages;
 
+import com.google.mail.core.base.LazyCollection;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
 
 import static com.google.mail.core.ConciseAPI.*;
 import static com.google.mail.core.conditions.CollectionConditions.texts;
-import static com.google.mail.core.conditions.ElementConditions.nthElementHasText;
 
 
 public class Mail {
 
-    public static String mails = "[gh='tl'] .zA";
+    public static LazyCollection mails =  $$("[gh='tl'] .zA");
+
 
     public static void send(String recipient, String subjectText) {
 
         $(byText("COMPOSE")).click();
-        $(By.name("to")).sendKeys(recipient + Keys.ENTER);
-        $(By.name("subjectbox")).sendKeys(subjectText + Keys.ENTER);
+        $(By.name("to")).setValue(recipient + Keys.ENTER);
+        $(By.name("subjectbox")).setValue(subjectText + Keys.ENTER);
         $(byText("Send")).click();
     }
 
     public static void searchBySubject(String subjectText) {
-        $(By.name("q")).sendKeys("subject: " + subjectText + Keys.ENTER);
+        $(By.name("q")).setValue("subject: " + subjectText + Keys.ENTER);
     }
 
     public static void assertMails(String... mailsTexts) {
-        assertThat(byCss(mails), texts(mailsTexts));
+        mails.shouldHave(texts(mailsTexts));
     }
 
     public static void assertMail(int index, String subjectText) {
-        assertThat(byCss(mails), nthElementHasText(index, subjectText));
+        //assertThat(byCss(mails), nthElementHasText(index, subjectText));
     }
 
 }
