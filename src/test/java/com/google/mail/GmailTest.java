@@ -1,15 +1,21 @@
 package com.google.mail;
 
+import core.BaseTest;
+import core.Configuration;
 import com.google.mail.pages.Gmail;
 import com.google.mail.pages.Mail;
 import com.google.mail.pages.Menu;
-import com.google.mail.testdata.TestData;
+import com.google.testdata.TestData;
 import org.junit.Test;
 
 import java.util.Date;
 
 
 public class GmailTest extends BaseTest {
+
+    {
+        Configuration.timeoutMs = 20000;
+    }
 
     @Test
     public void testLoginSendAndSearch() {
@@ -25,7 +31,6 @@ public class GmailTest extends BaseTest {
 
         Menu.goToInbox();
         Mail.assertMail(0, subject);
-
         Menu.goToSent();
         Mail.assertMail(0, subject);
 

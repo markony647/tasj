@@ -1,29 +1,26 @@
 package com.google.mail.pages;
 
-import com.google.mail.core.LazyCollection;
+import core.entities.collection.LazyCollection;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 
-
-import static com.google.mail.core.ConciseAPI.*;
-import static com.google.mail.core.conditions.CollectionConditions.texts;
+import static core.ConciseAPI.*;
+import static core.conditions.CollectionConditions.texts;
+import static core.conditions.ElementConditions.exactText;
 
 
 public class Mail {
 
-    public static LazyCollection mails =  $$("[gh='tl'] .zA");
-
+    public static LazyCollection mails = $$("[gh='tl'] .zA");
 
     public static void send(String recipient, String subjectText) {
-
         $(byText("COMPOSE")).click();
-        $(By.name("to")).setValue(recipient + Keys.ENTER);
-        $(By.name("subjectbox")).setValue(subjectText + Keys.ENTER);
+        $(By.name("to")).setValue(recipient).pressEnter();
+        $(By.name("subjectbox")).setValue(subjectText).pressEnter();
         $(byText("Send")).click();
     }
 
     public static void searchBySubject(String subjectText) {
-        $(By.name("q")).setValue("subject: " + subjectText + Keys.ENTER);
+        $(By.name("q")).setValue("subject: " + subjectText).pressEnter();
     }
 
     public static void assertMails(String... mailsTexts) {
@@ -31,7 +28,6 @@ public class Mail {
     }
 
     public static void assertMail(int index, String subjectText) {
-        //assertThat(byCss(mails), nthElementHasText(index, subjectText));
+        mails.get(index).$(".y6").shouldHave(exactText(subjectText));
     }
-
 }

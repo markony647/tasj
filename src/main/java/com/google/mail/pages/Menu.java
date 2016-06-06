@@ -1,9 +1,8 @@
 package com.google.mail.pages;
 
 
-import static com.google.mail.core.ConciseAPI.$;
-import static com.google.mail.core.ConciseAPI.byText;
-
+import static core.ConciseAPI.$;
+import static core.ConciseAPI.byText;
 
 public class Menu {
 
