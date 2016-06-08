@@ -1,11 +1,11 @@
-package com.google.mail;
+package gmail;
 
-import core.BaseTest;
+import testconfigs.BaseTest;
 import core.Configuration;
-import com.google.mail.pages.Gmail;
-import com.google.mail.pages.Mail;
-import com.google.mail.pages.Menu;
-import com.google.testdata.TestData;
+import pages.Gmail;
+import pages.Mail;
+import pages.Menu;
+import gmail.testdata.TestData;
 import org.junit.Test;
 
 import java.util.Date;

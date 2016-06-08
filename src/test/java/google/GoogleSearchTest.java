@@ -1,6 +1,6 @@
-package com.google;
+package google;
 
-import core.BaseTest;
+import testconfigs.BaseTest;
 import core.entities.collection.LazyCollection;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -16,9 +16,11 @@ public class GoogleSearchTest extends BaseTest {
     LazyCollection results = $$(".srg>.g");
 
     @Test
-    public void testSearchAndFollowLink() {
+    public void testSearchSeleniumHqPageFromGoogle() {
         open("http://google.com/ncr");
+
         $(By.name("q")).setValue("Selenium automates browsers").pressEnter();
+
         results.shouldHave(size(10));
         results.first().shouldHave(text("Selenium automates browsers"));
 

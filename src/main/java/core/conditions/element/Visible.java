@@ -10,7 +10,7 @@ public class Visible extends ElementCondition {
     public WebElement check(WebElement element) {
         result = element.isDisplayed();
 
-        return element.isDisplayed() ? element : null;
+        return result ? element : null;
     }
 
     @Override

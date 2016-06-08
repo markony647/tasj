@@ -21,4 +21,10 @@ public interface LazyCollection extends LazyEntity<List<WebElement>>, Iterable<L
 
     LazyElement first();
 
+    int size();
+
+    boolean isEmpty();
+
+    String[] getTexts();
+
 }

@@ -10,7 +10,6 @@ public class Size extends CollectionCondition {
     private int expectedSize;
     private int actualSize;
 
-
     public Size(int expectedSize) {
         this.expectedSize = expectedSize;
     }

@@ -1,4 +1,4 @@
-package com.google.testdata;
+package gmail.testdata;
 
 
 public class TestData {

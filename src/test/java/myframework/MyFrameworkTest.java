@@ -1,6 +1,7 @@
-package core;
+package myframework;
 
 
+import testconfigs.BaseTest;
 import core.entities.collection.LazyCollection;
 import core.entities.element.LazyElement;
 import org.junit.Test;
@@ -33,6 +34,7 @@ public class MyFrameworkTest extends BaseTest {
     @Test
     public void testIsOfApplyingCondition() {
         open("http://gmail.com");
+        $("#Email").shouldBe(visible());
         assertTrue($("#next").is(visible()));
     }
 

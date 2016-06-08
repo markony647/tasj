@@ -1,4 +1,4 @@
-package core;
+package testconfigs;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

@@ -8,7 +8,6 @@ import java.util.List;
 
 import static core.ConciseAPI.actions;
 import static core.ConciseAPI.byCss;
-import static core.ConciseAPI.getWebDriver;
 import static core.conditions.ElementConditions.present;
 import static core.conditions.ElementConditions.visible;
 
@@ -17,6 +16,26 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public abstract WebElement getWrappedEntity();
+
+    @Override
+    public LazyElement find(By innerLocator) {
+        return new LazyElementInnerElement(innerLocator, this);
+    }
+
+    @Override
+    public LazyElement find(String innerCssSelector) {
+        return find(byCss(innerCssSelector));
+    }
+
+    @Override
+    public LazyElement $(By innerLocator) {
+        return find(innerLocator);
+    }
+
+    @Override
+    public LazyElement $(String innerCssSelector) {
+        return find(innerCssSelector);
+    }
 
     @Override
     public LazyElement shouldBe(Condition<WebElement>... conditions) {
@@ -57,14 +76,14 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     public LazyElement pressEnter() {
-        WaitFor.until(this, visible());
-        sendKeys(Keys.ENTER);
+        WebElement element = WaitFor.until(this, visible());
+        element.sendKeys(Keys.ENTER);
         return this;
     }
 
     public LazyElement pressEscape() {
-        WaitFor.until(this, visible());
-        sendKeys(Keys.ESCAPE);
+        WebElement element = WaitFor.until(this, visible());
+        element.sendKeys(Keys.ESCAPE);
         return this;
     }
 
@@ -72,7 +91,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     public LazyElement setValue(String text) {
         WebElement element = WaitFor.until(this, visible());
         element.clear();
-        sendKeys(text);
+        element.sendKeys(text);
         return this;
     }
 
@@ -83,38 +102,20 @@ public abstract class AbstractLazyElement implements LazyElement {
     }
 
     @Override
-    public LazyElement $(By innerLocator) {
-        WebElement element = getWrappedEntity().findElement(innerLocator);
-        return new LazyWrappedWebElement(element);
-    }
-
-    @Override
-    public LazyElement find(By innerLocator) {
-        return $(innerLocator);
-    }
-
-    @Override
-    public LazyElement $(String innerCssSelector) {
-        return $(byCss(innerCssSelector));
-    }
-
-    @Override
-    public LazyElement find(String innerCssSelector) {
-        return $(byCss(innerCssSelector));
-    }
-
-    @Override
     public void submit() {
-        getWrappedEntity().submit();
+        WebElement element = WaitFor.until(this, visible());
+        element.submit();
     }
 
     @Override
     public void sendKeys(CharSequence... charSequences) {
-        getWrappedEntity().sendKeys(charSequences);
+        WebElement element = WaitFor.until(this, visible());
+        element.sendKeys(charSequences);
     }
 
     @Override
     public void clear() {
+        WaitFor.until(this, visible());
         getWrappedEntity().clear();
     }
 
@@ -126,13 +127,14 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public String getAttribute(String s) {
-        WaitFor.until(this, present());
-        return getWrappedEntity().getAttribute(s);
+        WebElement element = WaitFor.until(this, present());
+        return element.getAttribute(s);
     }
 
     @Override
     public boolean isSelected() {
-        return getWrappedEntity().isSelected();
+        WebElement element = WaitFor.until(this, present());
+        return element.isSelected();
     }
 
     @Override
@@ -142,19 +144,20 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public String getText() {
-        return getWrappedEntity().getText();
+        WebElement element = WaitFor.until(this, present());
+        return element.getText();
     }
 
     @Override
     public List<WebElement> findElements(By by) {
-        WaitFor.until(this, present());
-        return getWebDriver().findElements(by);
+        WebElement element = WaitFor.until(this, present());
+        return element.findElements(by);
     }
 
     @Override
     public WebElement findElement(By by) {
-        WaitFor.until(this, present());
-        return getWebDriver().findElement(by);
+        WebElement element = WaitFor.until(this, present());
+        return element.findElement(by);
     }
 
     @Override

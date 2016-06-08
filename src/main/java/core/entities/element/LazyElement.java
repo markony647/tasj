@@ -28,9 +28,9 @@ public interface LazyElement extends LazyEntity<WebElement>, WebElement {
 
     LazyElement $(By locator);
 
-    LazyElement find(By locator);
-
     LazyElement $(String cssSelector);
 
-    LazyElement find(String cssSelector);
+    LazyElement find(String innerCssSelector);
+
+    LazyElement find(By innerLocator);
 }

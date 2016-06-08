@@ -16,6 +16,7 @@ public class LazyWrappedWebElement extends AbstractLazyElement {
         return element;
     }
 
+    @Override
     public String toString() {
         return String.valueOf(element);
     }
