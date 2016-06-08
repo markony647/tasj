@@ -1,4 +1,4 @@
-package google;
+package googlesearch;
 
 import testconfigs.BaseTest;
 import core.entities.collection.LazyCollection;
@@ -17,7 +17,7 @@ public class GoogleSearchTest extends BaseTest {
 
     @Test
     public void testSearchSeleniumHqPageFromGoogle() {
-        open("http://google.com/ncr");
+        open("http://googlesearch.com/ncr");
 
         $(By.name("q")).setValue("Selenium automates browsers").pressEnter();
 

@@ -22,7 +22,7 @@ public class MyFrameworkTest extends BaseTest {
     public void testIterator() {
         LazyCollection results = $$(".srg>.g");
 
-        open("http://google.com/ncr");
+        open("http://googlesearch.com/ncr");
         $(By.name("q")).setValue("Selenium automates browsers").pressEnter();
         results.shouldHave(size(10));
 
@@ -40,13 +40,13 @@ public class MyFrameworkTest extends BaseTest {
 
     @Test
     public void testPresentCondition() {
-        open("http://google.com");
+        open("http://googlesearch.com");
         $(By.name("q")).shouldBe(present());
     }
 
     @Test
     public void testCssClassCondition() {
-        open("http://google.com");
+        open("http://googlesearch.com");
         $( By.name("q")).setValue("aa").pressEnter();
         $("._wI").shouldHave(cssClass("_kk"));
     }
