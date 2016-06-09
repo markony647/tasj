@@ -2,6 +2,7 @@ package core.entities.element;
 
 import core.conditions.Condition;
 import core.entities.LazyEntity;
+import core.entities.collection.LazyCollection;
 import org.openqa.selenium.*;
 
 public interface LazyElement extends LazyEntity<WebElement>, WebElement {
@@ -26,11 +27,15 @@ public interface LazyElement extends LazyEntity<WebElement>, WebElement {
 
     LazyElement doubleClick();
 
-    LazyElement $(By locator);
+    LazyElement $(By innerLocator);
 
-    LazyElement $(String cssSelector);
+    LazyElement $(String innerCssSelector);
 
     LazyElement find(String innerCssSelector);
 
     LazyElement find(By innerLocator);
+
+    LazyCollection findAll(By innerLocator);
+
+    LazyCollection findAll(String cssInnerLocator);
 }

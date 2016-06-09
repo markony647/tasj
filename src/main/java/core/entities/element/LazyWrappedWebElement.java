@@ -1,13 +1,16 @@
 package core.entities.element;
 
+import core.entities.LazyEntity;
 import org.openqa.selenium.WebElement;
 
 
 public class LazyWrappedWebElement extends AbstractLazyElement {
 
+    private LazyEntity lazyEntity;
     private WebElement element;
 
-    public LazyWrappedWebElement(WebElement element) {
+    public LazyWrappedWebElement(LazyEntity lazyEntity, WebElement element) {
+        this.lazyEntity = lazyEntity;
         this.element = element;
     }
 
@@ -18,6 +21,6 @@ public class LazyWrappedWebElement extends AbstractLazyElement {
 
     @Override
     public String toString() {
-        return String.valueOf(element);
+        return lazyEntity.toString();
     }
 }

@@ -7,20 +7,20 @@ import org.openqa.selenium.WebElement;
 public class LazyElementInnerElement extends AbstractLazyElement {
 
     private By innerLocator;
-    private LazyElement lazyElement;
+    private LazyElement parentLazyElement;
 
-    public LazyElementInnerElement(By innerLocator, LazyElement lazyElement) {
+    public LazyElementInnerElement(LazyElement parentLazyElement, By innerLocator) {
+        this.parentLazyElement = parentLazyElement;
         this.innerLocator = innerLocator;
-        this.lazyElement = lazyElement;
     }
 
     @Override
     public WebElement getWrappedEntity() {
-        return lazyElement.getWrappedEntity().findElement(innerLocator);
+        return parentLazyElement.getWrappedEntity().findElement(innerLocator);
     }
 
     @Override
     public String toString() {
-        return String.valueOf(innerLocator);
+        return parentLazyElement + "\ninner located: " + innerLocator;
     }
 }

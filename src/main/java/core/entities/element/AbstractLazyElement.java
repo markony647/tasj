@@ -2,6 +2,8 @@ package core.entities.element;
 
 import core.WaitFor;
 import core.conditions.Condition;
+import core.entities.collection.LazyCollection;
+import core.entities.collection.LazyElementInnerCollection;
 import org.openqa.selenium.*;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public LazyElement find(By innerLocator) {
-        return new LazyElementInnerElement(innerLocator, this);
+        return new LazyElementInnerElement(this, innerLocator);
     }
 
     @Override
@@ -35,6 +37,16 @@ public abstract class AbstractLazyElement implements LazyElement {
     @Override
     public LazyElement $(String innerCssSelector) {
         return find(innerCssSelector);
+    }
+
+    @Override
+    public LazyCollection findAll(By innerLocator) {
+        return new LazyElementInnerCollection(this, innerLocator);
+    }
+
+    @Override
+    public LazyCollection findAll(String cssInnerLocator) {
+        return findAll(byCss(cssInnerLocator));
     }
 
     @Override
@@ -63,24 +75,28 @@ public abstract class AbstractLazyElement implements LazyElement {
         return is(condition);
     }
 
+    @Override
     public LazyElement doubleClick() {
         WebElement element = WaitFor.until(this, visible());
         actions().doubleClick(element).perform();
         return this;
     }
 
+    @Override
     public LazyElement hover() {
         WebElement element = WaitFor.until(this, visible());
         actions().moveToElement(element).perform();
         return this;
     }
 
+    @Override
     public LazyElement pressEnter() {
         WebElement element = WaitFor.until(this, visible());
         element.sendKeys(Keys.ENTER);
         return this;
     }
 
+    @Override
     public LazyElement pressEscape() {
         WebElement element = WaitFor.until(this, visible());
         element.sendKeys(Keys.ESCAPE);
@@ -115,14 +131,14 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public void clear() {
-        WaitFor.until(this, visible());
-        getWrappedEntity().clear();
+        WebElement element = WaitFor.until(this, visible());
+        element.clear();
     }
 
     @Override
     public String getTagName() {
-        WaitFor.until(this, present());
-        return getWrappedEntity().getTagName();
+        WebElement element = WaitFor.until(this, visible());
+        return element.getTagName();
     }
 
     @Override
@@ -133,61 +149,67 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public boolean isSelected() {
-        WebElement element = WaitFor.until(this, present());
+        WebElement element = WaitFor.until(this, visible());
         return element.isSelected();
     }
 
     @Override
     public boolean isEnabled() {
-        return getWrappedEntity().isEnabled();
+        WebElement element = WaitFor.until(this, visible());
+        return element.isEnabled();
     }
 
     @Override
     public String getText() {
-        WebElement element = WaitFor.until(this, present());
+        WebElement element = WaitFor.until(this, visible());
         return element.getText();
     }
 
     @Override
     public List<WebElement> findElements(By by) {
-        WebElement element = WaitFor.until(this, present());
+        WebElement element = WaitFor.until(this, visible());
         return element.findElements(by);
     }
 
     @Override
     public WebElement findElement(By by) {
-        WebElement element = WaitFor.until(this, present());
+        WebElement element = WaitFor.until(this, visible());
         return element.findElement(by);
     }
 
     @Override
     public boolean isDisplayed() {
-        return getWrappedEntity().isDisplayed();
+        WebElement element = WaitFor.until(this, present());
+        return element.isDisplayed();
     }
 
     @Override
     public Point getLocation() {
-        return getWrappedEntity().getLocation();
+        WebElement element = WaitFor.until(this, visible());
+        return element.getLocation();
     }
 
     @Override
     public Dimension getSize() {
-        return getWrappedEntity().getSize();
+        WebElement element = WaitFor.until(this, visible());
+        return element.getSize();
     }
 
     @Override
     public Rectangle getRect() {
-        return getWrappedEntity().getRect();
+        WebElement element = WaitFor.until(this, visible());
+        return element.getRect();
     }
 
     @Override
     public String getCssValue(String s) {
-        WaitFor.until(this, present());
+        WaitFor.until(this, visible());
         return getWrappedEntity().getCssValue(s);
     }
 
     @Override
     public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        return getWrappedEntity().getScreenshotAs(outputType);
+        WebElement element = WaitFor.until(this, visible());
+        return element.getScreenshotAs(outputType);
     }
 }

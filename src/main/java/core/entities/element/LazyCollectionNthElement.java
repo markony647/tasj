@@ -6,21 +6,21 @@ import org.openqa.selenium.WebElement;
 
 public class LazyCollectionNthElement extends AbstractLazyElement {
 
+    private LazyCollection parentLazyCollection;
     private int index;
-    private LazyCollection lazyCollection;
 
-    public LazyCollectionNthElement(int index, LazyCollection lazyCollection) {
+    public LazyCollectionNthElement(LazyCollection parentLazyCollection, int index) {
+        this.parentLazyCollection = parentLazyCollection;
         this.index = index;
-        this.lazyCollection = lazyCollection;
     }
 
     @Override
     public WebElement getWrappedEntity() {
-        return lazyCollection.getWrappedEntity().get(index);
+        return parentLazyCollection.getWrappedEntity().get(index);
     }
 
     @Override
     public String toString() {
-        return lazyCollection.toString();
+        return parentLazyCollection + "\nby index: " + index;
     }
 }

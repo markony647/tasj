@@ -36,7 +36,7 @@ public abstract class AbstractLazyCollection implements LazyCollection {
 
     @Override
     public LazyElement get(int index) {
-        return new LazyCollectionNthElement(index, this);
+        return new LazyCollectionNthElement(this, index);
     }
 
     @Override
@@ -69,7 +69,7 @@ public abstract class AbstractLazyCollection implements LazyCollection {
 
         List<LazyElement> lazyElements = new ArrayList<>();
         for (WebElement webElement : webElements) {
-            lazyElements.add(new LazyWrappedWebElement(webElement));
+            lazyElements.add(new LazyWrappedWebElement(this, webElement));
         }
         return lazyElements.iterator();
     }
