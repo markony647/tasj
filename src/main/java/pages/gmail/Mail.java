@@ -1,6 +1,6 @@
-package pages;
+package pages.gmail;
 
-import core.entities.collection.LazyCollection;
+import core.entities.LazyCollection;
 import org.openqa.selenium.By;
 
 import static core.ConciseAPI.*;
@@ -28,6 +28,6 @@ public class Mail {
     }
 
     public static void assertMail(int index, String subjectText) {
-       // mails.get(index).$(".y6").shouldHave(exactText(subjectText));
+        mails.get(index).$(".y6").shouldHave(exactText(subjectText));
     }
 }

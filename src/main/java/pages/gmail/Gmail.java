@@ -1,4 +1,4 @@
-package pages;
+package pages.gmail;
 
 
 import static core.ConciseAPI.*;

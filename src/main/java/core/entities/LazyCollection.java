@@ -1,9 +1,7 @@
-package core.entities.collection;
+package core.entities;
 
 
 import core.conditions.Condition;
-import core.entities.LazyEntity;
-import core.entities.element.LazyElement;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -19,6 +17,10 @@ public interface LazyCollection extends LazyEntity<List<WebElement>>, Iterable<L
 
     LazyElement get(int index);
 
+    LazyCollection filter(Condition<WebElement> condition);
+
+    LazyElement find(Condition<WebElement> condition);
+
     LazyElement first();
 
     int size();
@@ -26,5 +28,4 @@ public interface LazyCollection extends LazyEntity<List<WebElement>>, Iterable<L
     boolean isEmpty();
 
     String[] getTexts();
-
 }

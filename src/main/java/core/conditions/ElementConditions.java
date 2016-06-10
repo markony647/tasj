@@ -24,4 +24,8 @@ public class ElementConditions {
     public static Condition<WebElement> exactText(final String expectedText) {
         return new ExactText(expectedText);
     }
+
+    public static Condition<WebElement> enabled() {
+        return new Enabled();
+    }
 }

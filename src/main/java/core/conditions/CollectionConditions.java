@@ -21,4 +21,8 @@ public class CollectionConditions {
     public static Condition<List<WebElement>> size(final int size) {
         return new Size(size);
     }
+
+    public static Condition<List<WebElement>> empty() {
+        return new Size(0);
+    }
 }

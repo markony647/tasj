@@ -2,9 +2,9 @@ package gmail;
 
 import testconfigs.BaseTest;
 import core.Configuration;
-import pages.Gmail;
-import pages.Mail;
-import pages.Menu;
+import pages.gmail.Gmail;
+import pages.gmail.Mail;
+import pages.gmail.Menu;
 import gmail.testdata.TestData;
 import org.junit.Test;
 

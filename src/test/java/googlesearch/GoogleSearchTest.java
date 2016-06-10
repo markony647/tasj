@@ -1,7 +1,7 @@
 package googlesearch;
 
 import testconfigs.BaseTest;
-import core.entities.collection.LazyCollection;
+import core.entities.LazyCollection;
 import org.junit.Test;
 import org.openqa.selenium.By;
 

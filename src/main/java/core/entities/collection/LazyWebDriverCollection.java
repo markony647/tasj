@@ -22,6 +22,7 @@ public class LazyWebDriverCollection extends AbstractLazyCollection {
         return getWebDriver().findElements(locator);
     }
 
+    @Override
     public String toString() {
         return String.valueOf(locator);
     }

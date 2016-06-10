@@ -3,8 +3,8 @@ package core;
 
 import core.entities.collection.LazyWebDriverCollection;
 import core.entities.element.LazyWebDriverElement;
-import core.entities.collection.LazyCollection;
-import core.entities.element.LazyElement;
+import core.entities.LazyCollection;
+import core.entities.LazyElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

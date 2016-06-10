@@ -2,8 +2,8 @@ package myframework;
 
 
 import testconfigs.BaseTest;
-import core.entities.collection.LazyCollection;
-import core.entities.element.LazyElement;
+import core.entities.LazyCollection;
+import core.entities.LazyElement;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
@@ -24,7 +24,9 @@ public class MyFrameworkTest extends BaseTest {
         results.shouldHave(size(10));
 
         for (LazyElement element : results) {
-            System.out.println(element.getText());
+           // System.out.println(element.getText());
+           //element.shouldHave(exactText("asdas"));
+            element.find(".asd").shouldHave(exactText("asd"));
         }
     }
 
@@ -43,7 +45,7 @@ public class MyFrameworkTest extends BaseTest {
 
     @Test
     public void testCssClassCondition() {
-        open("http://googlesearch.com");
+        open("http://google.com");
         $(By.name("q")).setValue("aa").pressEnter();
         $("._wI").shouldHave(cssClass("_kk"));
     }
@@ -54,6 +56,6 @@ public class MyFrameworkTest extends BaseTest {
 
         open("http://gmail.com");
         $("#Email").shouldBe(visible());
-        footerParagraphs.shouldHave(exactTexts("Create account","One Google Account for everything Google"));
+        footerParagraphs.shouldHave(exactTexts("Create account", "One Google Account for everything Google"));
     }
 }

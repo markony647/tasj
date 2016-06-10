@@ -1,6 +1,6 @@
 package core.entities.element;
 
-import core.entities.collection.LazyCollection;
+import core.entities.LazyCollection;
 import org.openqa.selenium.WebElement;
 
 

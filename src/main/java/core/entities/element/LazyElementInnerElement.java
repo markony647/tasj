@@ -1,6 +1,7 @@
 package core.entities.element;
 
 
+import core.entities.LazyElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

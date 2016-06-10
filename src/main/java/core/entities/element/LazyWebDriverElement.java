@@ -17,6 +17,7 @@ public class LazyWebDriverElement extends AbstractLazyElement {
         return ConciseAPI.getWebDriver().findElement(locator);
     }
 
+    @Override
     public String toString() {
         return String.valueOf(locator);
     }

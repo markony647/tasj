@@ -1,8 +1,6 @@
-package core.entities.element;
+package core.entities;
 
 import core.conditions.Condition;
-import core.entities.LazyEntity;
-import core.entities.collection.LazyCollection;
 import org.openqa.selenium.*;
 
 public interface LazyElement extends LazyEntity<WebElement>, WebElement {
@@ -23,6 +21,8 @@ public interface LazyElement extends LazyEntity<WebElement>, WebElement {
 
     LazyElement pressEscape();
 
+    LazyElement pressTab();
+
     LazyElement hover();
 
     LazyElement doubleClick();
@@ -38,4 +38,5 @@ public interface LazyElement extends LazyEntity<WebElement>, WebElement {
     LazyCollection findAll(By innerLocator);
 
     LazyCollection findAll(String cssInnerLocator);
+
 }

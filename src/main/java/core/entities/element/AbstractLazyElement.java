@@ -2,7 +2,8 @@ package core.entities.element;
 
 import core.WaitFor;
 import core.conditions.Condition;
-import core.entities.collection.LazyCollection;
+import core.entities.LazyCollection;
+import core.entities.LazyElement;
 import core.entities.collection.LazyElementInnerCollection;
 import org.openqa.selenium.*;
 
@@ -73,6 +74,13 @@ public abstract class AbstractLazyElement implements LazyElement {
     @Override
     public boolean has(Condition<WebElement> condition) {
         return is(condition);
+    }
+
+    @Override
+    public LazyElement pressTab() {
+        WebElement element = WaitFor.until(this, visible());
+        element.sendKeys(Keys.TAB);
+        return this;
     }
 
     @Override
@@ -203,7 +211,7 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public String getCssValue(String s) {
-        WaitFor.until(this, visible());
+        WaitFor.until(this, present());
         return getWrappedEntity().getCssValue(s);
     }
 

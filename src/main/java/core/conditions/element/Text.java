@@ -7,6 +7,7 @@ public class Text extends ExactText {
         super(expectedText);
     }
 
+    @Override
     public boolean checkElement() {
         return actualText.contains(expectedText);
     }
