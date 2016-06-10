@@ -24,9 +24,7 @@ public class MyFrameworkTest extends BaseTest {
         results.shouldHave(size(10));
 
         for (LazyElement element : results) {
-           // System.out.println(element.getText());
-           //element.shouldHave(exactText("asdas"));
-            element.find(".asd").shouldHave(exactText("asd"));
+            System.out.println(element.getText());
         }
     }
 
