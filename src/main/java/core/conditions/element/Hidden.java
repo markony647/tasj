@@ -1,24 +1,24 @@
 package core.conditions.element;
 
+
 import org.openqa.selenium.WebElement;
 
-
-public class Present extends ElementCondition {
+public class Hidden extends ElementCondition {
     private boolean result;
 
     @Override
     public boolean check(WebElement element) {
-        result = (element != null);
+        result = !element.isDisplayed();
         return result;
     }
 
     @Override
     public String expected() {
-        return "present";
+        return "hidden";
     }
 
     @Override
     public String actual() {
-        return result ? "present" : "not present";
+        return result ? "hidden" : "not hidden";
     }
 }

@@ -14,14 +14,14 @@ public class CssClass extends ElementCondition {
     }
 
     @Override
-    public WebElement check(WebElement element) {
+    public boolean check(WebElement element) {
         actualCssClasses = element.getAttribute("class").split(" ");
         for (int i = 0; i < actualCssClasses.length; i++) {
             if (expectedCssClass.equals(actualCssClasses[i])) {
-                return element;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     @Override

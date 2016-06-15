@@ -1,6 +1,7 @@
 package core.entities.element;
 
 import core.entities.LazyCollection;
+import core.exceptions.LazyСollectionIndexOutOfBoundsException;
 import org.openqa.selenium.WebElement;
 
 
@@ -15,8 +16,12 @@ public class LazyCollectionNthElement extends AbstractLazyElement {
     }
 
     @Override
-    public WebElement getWrappedEntity() {
-        return parentLazyCollection.getWrappedEntity().get(index);
+    public WebElement fetchWrappedEntity () {
+        try {
+            return parentLazyCollection.getWrappedEntity().get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new LazyСollectionIndexOutOfBoundsException(toString()) ;
+        }
     }
 
     @Override

@@ -3,33 +3,35 @@ package core;
 import core.conditions.Condition;
 
 import core.entities.LazyEntity;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.*;
+
 
 
 public class WaitFor {
 
     private LazyEntity lazyEntity;
+    private Exception lastError;
 
     public WaitFor(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
     }
 
     public <T> T until(final long timeoutMs, final Condition<T> condition) {
+
         final long startTime = System.currentTimeMillis();
         do {
-            T result = condition.apply(lazyEntity);
-            if (result == null) {
-                sleep(Configuration.pollingInterval);
-                continue;
+            try {
+                return condition.apply(lazyEntity);
+            } catch (WebDriverException e) {
+                lastError = e;
             }
-            return result;
-        }
-        while (System.currentTimeMillis() - startTime < timeoutMs);
+            sleep(Configuration.pollingInterval);
+
+        } while (System.currentTimeMillis() - startTime < timeoutMs);
 
         throw new TimeoutException(condition.getClass().getSimpleName() +
                 "\nFailed while waiting for " +
-                "\nTimeout: " + Configuration.timeoutMs / 1000 + "s." +
-                condition);
+                "\nTimeout: " + Configuration.timeoutMs / 1000 + "s." + condition, lastError);
     }
 
     public static <T> T until(LazyEntity lazyEntity, final Condition<T>... conditions) {

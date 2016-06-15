@@ -5,14 +5,13 @@ import org.openqa.selenium.WebElement;
 
 public class Enabled extends ElementCondition {
 
-
     private boolean result;
 
     @Override
-    public WebElement check(WebElement element) {
+    public boolean check(WebElement element) {
         result = element.isEnabled();
 
-        return result ? element : null;
+        return result;
     }
 
     @Override

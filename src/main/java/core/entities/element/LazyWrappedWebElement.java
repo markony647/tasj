@@ -6,21 +6,21 @@ import org.openqa.selenium.WebElement;
 
 public class LazyWrappedWebElement extends AbstractLazyElement {
 
-    private LazyEntity lazyEntity;
+    private LazyEntity parentLazyEntity;
     private WebElement element;
 
-    public LazyWrappedWebElement(LazyEntity lazyEntity, WebElement element) {
-        this.lazyEntity = lazyEntity;
+    public LazyWrappedWebElement(LazyEntity parentLazyEntity, WebElement element) {
+        this.parentLazyEntity = parentLazyEntity;
         this.element = element;
     }
 
     @Override
-    public WebElement getWrappedEntity() {
+    public WebElement fetchWrappedEntity() {
         return element;
     }
 
     @Override
     public String toString() {
-        return lazyEntity + "\nparent from: " + lazyEntity.getClass().getName() + "\nwebElement: " + element;
+        return "WebElement " + element + "from " + parentLazyEntity ;
     }
 }

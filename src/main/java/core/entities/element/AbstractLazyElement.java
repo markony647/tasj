@@ -5,6 +5,7 @@ import core.conditions.Condition;
 import core.entities.LazyCollection;
 import core.entities.LazyElement;
 import core.entities.collection.LazyElementInnerCollection;
+import core.exceptions.ElementNotFoundException;
 import org.openqa.selenium.*;
 
 import java.util.List;
@@ -17,8 +18,16 @@ import static core.conditions.ElementConditions.visible;
 
 public abstract class AbstractLazyElement implements LazyElement {
 
+    public abstract WebElement fetchWrappedEntity();
+
     @Override
-    public abstract WebElement getWrappedEntity();
+    public WebElement getWrappedEntity() {
+        WebElement actualElement = fetchWrappedEntity();
+        if (actualElement == null) {
+             throw new ElementNotFoundException(toString());
+        }
+        return actualElement;
+    }
 
     @Override
     public LazyElement find(By innerLocator) {
@@ -68,7 +77,12 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public boolean is(Condition<WebElement> condition) {
-        return condition.apply(this) != null;
+        try {
+            condition.check(getWrappedEntity());
+            return true;
+        } catch (WebDriverException e) {
+            return false;
+        }
     }
 
     @Override
@@ -211,8 +225,8 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public String getCssValue(String s) {
-        WaitFor.until(this, present());
-        return getWrappedEntity().getCssValue(s);
+        WebElement element = WaitFor.until(this, present());
+        return element.getCssValue(s);
     }
 
     @Override

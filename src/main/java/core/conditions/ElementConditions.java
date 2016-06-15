@@ -9,6 +9,10 @@ public class ElementConditions {
         return new Visible();
     }
 
+    public static Condition<WebElement> hidden() {
+        return new Hidden();
+    }
+
     public static Condition<WebElement> cssClass(final String cssClass) {
         return new CssClass(cssClass);
     }

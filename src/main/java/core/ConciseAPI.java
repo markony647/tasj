@@ -63,7 +63,7 @@ public class ConciseAPI {
         ((JavascriptExecutor) getWebDriver()).executeScript(jsScript);
     }
 
-    public static String url () {
+    public static String url() {
         return getWebDriver().getCurrentUrl();
     }
 }

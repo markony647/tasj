@@ -7,10 +7,9 @@ public class Visible extends ElementCondition {
     private boolean result;
 
     @Override
-    public WebElement check(WebElement element) {
+    public boolean check(WebElement element) {
         result = element.isDisplayed();
-
-        return result ? element : null;
+        return result;
     }
 
     @Override

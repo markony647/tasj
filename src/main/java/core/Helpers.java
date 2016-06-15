@@ -14,7 +14,6 @@ public class Helpers {
         for (WebElement element : elements) {
             listTexts.add(element.getText());
         }
-
         return listTexts;
     }
 }

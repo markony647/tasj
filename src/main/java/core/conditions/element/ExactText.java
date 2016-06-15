@@ -13,12 +13,9 @@ public class ExactText extends ElementCondition {
     }
 
     @Override
-    public WebElement check(WebElement element) {
+    public boolean check(WebElement element) {
         actualText = element.getText();
-        if (!checkElement()) {
-            return null;
-        }
-        return element;
+        return checkElement();
     }
 
     public boolean checkElement() {

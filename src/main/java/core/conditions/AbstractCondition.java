@@ -2,14 +2,12 @@ package core.conditions;
 
 
 import core.entities.LazyEntity;
-import org.openqa.selenium.*;
+import core.exceptions.WebDriverAssertionException;
 
 
 public abstract class AbstractCondition<T> implements Condition<T>, DescribesResult {
 
     private LazyEntity lazyEntity;
-
-    public abstract T check(T entity);
 
     @Override
     public String toString() {
@@ -18,12 +16,12 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
                 (actual() == "" ? "" : "\nactual: " + actual());
     }
 
-    public T apply(LazyEntity lazyEntity) {
+    public T apply(LazyEntity lazyEntity) throws WebDriverAssertionException {
         this.lazyEntity = lazyEntity;
-        try {
-            return check((T) lazyEntity.getWrappedEntity());
-        } catch (StaleElementReferenceException | ElementNotVisibleException | IndexOutOfBoundsException | NoSuchElementException e) {
+        T result = (T) lazyEntity.getWrappedEntity();
+        if (check(result)) {
+            return result;
         }
-        return null;
+        throw new WebDriverAssertionException(toString());
     }
 }

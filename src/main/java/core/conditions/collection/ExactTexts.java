@@ -17,20 +17,20 @@ public class ExactTexts extends CollectionCondition {
     }
 
     @Override
-    public List<WebElement> check(List<WebElement> elements) {
+    public boolean check(List<WebElement> elements) {
 
         actualTexts = Helpers.getTexts(elements);
 
         if (actualTexts.size() != expectedTexts.length) {
-            return null;
+            return false;
         }
 
         for (int i = 0; i < expectedTexts.length; i++) {
             if (!checkElement(i)) {
-                return null;
+                return false;
             }
         }
-        return elements;
+        return true;
     }
 
     public boolean checkElement(int index) {

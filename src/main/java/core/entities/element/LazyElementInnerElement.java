@@ -16,7 +16,7 @@ public class LazyElementInnerElement extends AbstractLazyElement {
     }
 
     @Override
-    public WebElement getWrappedEntity() {
+    public WebElement fetchWrappedEntity() {
         return parentLazyElement.getWrappedEntity().findElement(innerLocator);
     }
 

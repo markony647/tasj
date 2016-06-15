@@ -17,7 +17,7 @@ public class GoogleSearchTest extends BaseTest {
 
     @Test
     public void testSearchSeleniumHqPageFromGoogle() {
-        open("http://googlesearch.com/ncr");
+        open("http://google.com");
 
         $(By.name("q")).setValue("Selenium automates browsers").pressEnter();
 

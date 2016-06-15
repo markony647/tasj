@@ -15,9 +15,9 @@ public class Size extends CollectionCondition {
     }
 
     @Override
-    public List<WebElement> check(List<WebElement> elements) {
+    public boolean check(List<WebElement> elements) {
         actualSize = elements.size();
-        return expectedSize == actualSize ? elements : null;
+        return expectedSize == actualSize;
     }
 
     @Override
