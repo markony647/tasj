@@ -17,7 +17,7 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
     }
 
     @Override
-    public T apply(LazyEntity lazyEntity) throws WebDriverAssertionException {
+    public T apply(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
         T result = (T) lazyEntity.getWrappedEntity();
         if (check(result)) {
