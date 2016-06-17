@@ -32,6 +32,6 @@ public class LazyCollectionFoundByConditionElement extends AbstractLazyElement {
 
     @Override
     public String toString() {
-        return  parentLazyCollection.toString() + " find(" + elementCondition.getClass().getSimpleName() + ")";
+        return parentLazyCollection.toString() + " find(" + elementCondition.getClass().getSimpleName() + ")";
     }
 }

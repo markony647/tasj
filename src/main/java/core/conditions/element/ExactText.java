@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 
 public class ExactText extends ElementCondition {
 
-    protected String expectedText;
-    protected String actualText;
+    public String expectedText;
+    public String actualText;
 
     public ExactText(String expectedText) {
         this.expectedText = expectedText;

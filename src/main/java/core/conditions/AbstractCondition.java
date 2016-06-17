@@ -16,6 +16,7 @@ public abstract class AbstractCondition<T> implements Condition<T>, DescribesRes
                 (actual() == "" ? "" : "\nactual: " + actual());
     }
 
+    @Override
     public T apply(LazyEntity lazyEntity) throws WebDriverAssertionException {
         this.lazyEntity = lazyEntity;
         T result = (T) lazyEntity.getWrappedEntity();

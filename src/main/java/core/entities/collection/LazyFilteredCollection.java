@@ -3,11 +3,9 @@ package core.entities.collection;
 
 import core.conditions.Condition;
 import core.entities.LazyCollection;
-import core.entities.element.LazyWrappedWebElement;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -36,6 +34,6 @@ public class LazyFilteredCollection extends AbstractLazyCollection {
 
     @Override
     public String toString() {
-        return  parentLazyCollection.toString() + " filter(" + elementCondition.getClass().getSimpleName() + ")";
+        return parentLazyCollection.toString() + " filter(" + elementCondition.getClass().getSimpleName() + ")";
     }
 }

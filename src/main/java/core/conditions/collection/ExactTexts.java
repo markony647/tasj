@@ -8,9 +8,8 @@ import java.util.List;
 
 
 public class ExactTexts extends CollectionCondition {
-    protected String[] expectedTexts;
-    protected List<String> actualTexts;
-
+    public String[] expectedTexts;
+    public List<String> actualTexts;
 
     public ExactTexts(String... expectedTexts) {
         this.expectedTexts = expectedTexts;

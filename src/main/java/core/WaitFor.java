@@ -6,18 +6,16 @@ import core.entities.LazyEntity;
 import org.openqa.selenium.*;
 
 
-
 public class WaitFor {
 
     private LazyEntity lazyEntity;
-    private Exception lastError;
 
     public WaitFor(LazyEntity lazyEntity) {
         this.lazyEntity = lazyEntity;
     }
 
     public <T> T until(final long timeoutMs, final Condition<T> condition) {
-
+        Throwable lastError;
         final long startTime = System.currentTimeMillis();
         do {
             try {

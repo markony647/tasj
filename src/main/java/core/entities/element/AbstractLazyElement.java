@@ -1,10 +1,12 @@
 package core.entities.element;
 
 import core.WaitFor;
+import core.WithWaitFor;
 import core.conditions.Condition;
 import core.entities.LazyCollection;
 import core.entities.LazyElement;
 import core.entities.collection.LazyElementInnerCollection;
+import core.Command;
 import core.exceptions.ElementNotFoundException;
 import org.openqa.selenium.*;
 
@@ -24,7 +26,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     public WebElement getWrappedEntity() {
         WebElement actualElement = fetchWrappedEntity();
         if (actualElement == null) {
-             throw new ElementNotFoundException(toString());
+            throw new ElementNotFoundException(toString());
         }
         return actualElement;
     }
@@ -78,7 +80,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     @Override
     public boolean is(Condition<WebElement> condition) {
         try {
-            condition.check(getWrappedEntity());
+            condition.apply(this);
             return true;
         } catch (WebDriverException e) {
             return false;
@@ -92,146 +94,248 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public LazyElement pressTab() {
-        WebElement element = WaitFor.until(this, visible());
-        element.sendKeys(Keys.TAB);
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                element.sendKeys(Keys.TAB);
+                return element;
+            }
+        });
         return this;
     }
 
     @Override
     public LazyElement doubleClick() {
-        WebElement element = WaitFor.until(this, visible());
-        actions().doubleClick(element).perform();
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                actions().doubleClick(element).perform();
+                return element;
+            }
+        });
         return this;
     }
 
     @Override
     public LazyElement hover() {
-        WebElement element = WaitFor.until(this, visible());
-        actions().moveToElement(element).perform();
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                actions().moveToElement(element).perform();
+                return element;
+            }
+        });
         return this;
     }
 
     @Override
     public LazyElement pressEnter() {
-        WebElement element = WaitFor.until(this, visible());
-        element.sendKeys(Keys.ENTER);
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                element.sendKeys(Keys.ENTER);
+                return element;
+            }
+        });
         return this;
     }
 
     @Override
     public LazyElement pressEscape() {
-        WebElement element = WaitFor.until(this, visible());
-        element.sendKeys(Keys.ESCAPE);
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                element.sendKeys(Keys.ESCAPE);
+                return element;
+            }
+        });
         return this;
     }
 
     @Override
-    public LazyElement setValue(String text) {
-        WebElement element = WaitFor.until(this, visible());
-        element.clear();
-        element.sendKeys(text);
+    public LazyElement setValue(final String text) {
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                element.clear();
+                element.sendKeys(text);
+                return element;
+            }
+        });
         return this;
     }
 
     @Override
     public void click() {
-        WebElement element = WaitFor.until(this, visible());
-        element.click();
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                element.click();
+                return element;
+            }
+        });
     }
 
     @Override
     public void submit() {
-        WebElement element = WaitFor.until(this, visible());
-        element.submit();
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                element.submit();
+                return element;
+            }
+        });
     }
 
     @Override
-    public void sendKeys(CharSequence... charSequences) {
-        WebElement element = WaitFor.until(this, visible());
-        element.sendKeys(charSequences);
+    public void sendKeys(final CharSequence... charSequences) {
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                element.sendKeys(charSequences);
+                return element;
+            }
+        });
     }
 
     @Override
     public void clear() {
-        WebElement element = WaitFor.until(this, visible());
-        element.clear();
+        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                element.clear();
+                return element;
+            }
+        });
     }
 
     @Override
     public String getTagName() {
-        WebElement element = WaitFor.until(this, visible());
-        return element.getTagName();
+        return new WithWaitFor(this, visible()).run(new Command<String>() {
+            @Override
+            public String execute(WebElement element) {
+                return element.getTagName();
+            }
+        });
     }
 
     @Override
-    public String getAttribute(String s) {
-        WebElement element = WaitFor.until(this, present());
-        return element.getAttribute(s);
+    public String getAttribute(final String s) {
+        return new WithWaitFor(this, present()).run(new Command<String>() {
+            @Override
+            public String execute(WebElement element) {
+                return element.getAttribute(s);
+            }
+        });
     }
 
     @Override
     public boolean isSelected() {
-        WebElement element = WaitFor.until(this, visible());
-        return element.isSelected();
+        return new WithWaitFor(this, visible()).run(new Command<Boolean>() {
+            @Override
+            public Boolean execute(WebElement element) {
+                return element.isSelected();
+            }
+        });
     }
 
     @Override
     public boolean isEnabled() {
-        WebElement element = WaitFor.until(this, visible());
-        return element.isEnabled();
+        return new WithWaitFor(this, visible()).run(new Command<Boolean>() {
+            @Override
+            public Boolean execute(WebElement element) {
+                return element.isEnabled();
+            }
+        });
     }
 
     @Override
     public String getText() {
-        WebElement element = WaitFor.until(this, visible());
-        return element.getText();
+        return new WithWaitFor(this, visible()).run(new Command<String>() {
+            @Override
+            public String execute(WebElement element) {
+                return element.getText();
+            }
+        });
     }
 
     @Override
-    public List<WebElement> findElements(By by) {
-        WebElement element = WaitFor.until(this, visible());
-        return element.findElements(by);
+    public List<WebElement> findElements(final By by) {
+        return new WithWaitFor(this, visible()).run(new Command<List<WebElement>>() {
+            @Override
+            public List<WebElement> execute(WebElement element) {
+                return element.findElements(by);
+            }
+        });
     }
 
     @Override
-    public WebElement findElement(By by) {
-        WebElement element = WaitFor.until(this, visible());
-        return element.findElement(by);
+    public WebElement findElement(final By by) {
+        return new WithWaitFor(this, visible()).run(new Command<WebElement>() {
+            @Override
+            public WebElement execute(WebElement element) {
+                return element.findElement(by);
+            }
+        });
     }
 
     @Override
     public boolean isDisplayed() {
-        WebElement element = WaitFor.until(this, present());
-        return element.isDisplayed();
+        return new WithWaitFor(this, present()).run(new Command<Boolean>() {
+            @Override
+            public Boolean execute(WebElement element) {
+                return element.isDisplayed();
+            }
+        });
     }
 
     @Override
     public Point getLocation() {
-        WebElement element = WaitFor.until(this, visible());
-        return element.getLocation();
+        return new WithWaitFor(this, visible()).run(new Command<Point>() {
+            @Override
+            public Point execute(WebElement element) {
+                return element.getLocation();
+            }
+        });
     }
 
     @Override
     public Dimension getSize() {
-        WebElement element = WaitFor.until(this, visible());
-        return element.getSize();
+        return new WithWaitFor(this, visible()).run(new Command<Dimension>() {
+            @Override
+            public Dimension execute(WebElement element) {
+                return element.getSize();
+            }
+        });
     }
 
     @Override
     public Rectangle getRect() {
-        WebElement element = WaitFor.until(this, visible());
-        return element.getRect();
+        return new WithWaitFor(this, visible()).run(new Command<Rectangle>() {
+            @Override
+            public Rectangle execute(WebElement element) {
+                return element.getRect();
+            }
+        });
     }
 
     @Override
-    public String getCssValue(String s) {
-        WebElement element = WaitFor.until(this, present());
-        return element.getCssValue(s);
+    public String getCssValue(final String s) {
+        return new WithWaitFor(this, present()).run(new Command<String>() {
+            @Override
+            public String execute(WebElement element) {
+                return element.getCssValue(s);
+            }
+        });
     }
 
     @Override
-    public <X> X getScreenshotAs(OutputType<X> outputType) throws WebDriverException {
-        WebElement element = WaitFor.until(this, visible());
-        return element.getScreenshotAs(outputType);
+    public <X> X getScreenshotAs(final OutputType<X> outputType) throws WebDriverException {
+        return new WithWaitFor(this, visible()).run(new Command<X>() {
+            @Override
+            public X execute(WebElement element) {
+                return element.getScreenshotAs(outputType);
+            }
+        });
     }
 }

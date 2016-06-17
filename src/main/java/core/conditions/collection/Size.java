@@ -6,7 +6,6 @@ import java.util.List;
 
 
 public class Size extends CollectionCondition {
-
     private int expectedSize;
     private int actualSize;
 
