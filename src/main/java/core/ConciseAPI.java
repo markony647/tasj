@@ -67,7 +67,7 @@ public class ConciseAPI {
         return getWebDriver().getCurrentUrl();
     }
 
-    public static ExpectedCondition<Boolean> assertUrlContains(String expectedUrl) {
-        return ExpectedConditions.urlContains(expectedUrl);
+    public static void assertUrlContains(String expectedUrl) {
+        new WebDriverWait(getWebDriver(), Configuration.timeoutMs / 1000).until(ExpectedConditions.urlContains(expectedUrl));
     }
 }
