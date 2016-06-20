@@ -25,6 +25,6 @@ public class LazyElementInnerCollection extends AbstractLazyCollection {
 
     @Override
     public String toString() {
-        return parentLazyElement + "\ninner located: " + innerLocator;
+        return parentLazyElement.toString() + " findAll(" + innerLocator + ")";
     }
 }

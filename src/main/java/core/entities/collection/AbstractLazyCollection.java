@@ -1,6 +1,7 @@
 package core.entities.collection;
 
 
+import core.Helpers;
 import core.WaitFor;
 import core.conditions.Condition;
 import core.entities.LazyCollection;
@@ -59,10 +60,7 @@ public abstract class AbstractLazyCollection implements LazyCollection {
     @Override
     public String[] getTexts() {
         String[] texts = new String[getWrappedEntity().size()];
-        for (int i = 0; i < getWrappedEntity().size(); i++) {
-            texts[i] = getWrappedEntity().get(i).getText();
-        }
-        return texts;
+        return Helpers.getTexts(getWrappedEntity()).toArray(texts);
     }
 
     @Override

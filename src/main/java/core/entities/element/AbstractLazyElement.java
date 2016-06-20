@@ -80,8 +80,7 @@ public abstract class AbstractLazyElement implements LazyElement {
     @Override
     public boolean is(Condition<WebElement> condition) {
         try {
-            condition.apply(this);
-            return true;
+            return condition.check(getWrappedEntity());
         } catch (WebDriverException e) {
             return false;
         }
@@ -94,13 +93,7 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public LazyElement pressTab() {
-        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
-            @Override
-            public WebElement execute(WebElement element) {
-                element.sendKeys(Keys.TAB);
-                return element;
-            }
-        });
+        sendKeys(Keys.TAB);
         return this;
     }
 
@@ -130,25 +123,13 @@ public abstract class AbstractLazyElement implements LazyElement {
 
     @Override
     public LazyElement pressEnter() {
-        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
-            @Override
-            public WebElement execute(WebElement element) {
-                element.sendKeys(Keys.ENTER);
-                return element;
-            }
-        });
+        sendKeys(Keys.ENTER);
         return this;
     }
 
     @Override
     public LazyElement pressEscape() {
-        new WithWaitFor(this, visible()).run(new Command<WebElement>() {
-            @Override
-            public WebElement execute(WebElement element) {
-                element.sendKeys(Keys.ESCAPE);
-                return element;
-            }
-        });
+        sendKeys(Keys.ESCAPE);
         return this;
     }
 

@@ -1,5 +1,6 @@
 package googlesearch;
 
+import core.ConciseAPI;
 import testconfigs.BaseTest;
 import core.entities.LazyCollection;
 import org.junit.Test;
@@ -25,7 +26,6 @@ public class GoogleSearchTest extends BaseTest {
         results.first().shouldHave(text("Selenium automates browsers"));
 
         results.first().$("h3>a").click();
-        $("#header").shouldBe(visible());
-        assertTrue(url().equals("http://www.seleniumhq.org/"));
+        assertUrlContains("http://www.seleniumhq.org/");
     }
 }
