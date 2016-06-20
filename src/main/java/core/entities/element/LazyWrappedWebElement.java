@@ -21,6 +21,6 @@ public class LazyWrappedWebElement extends AbstractLazyElement {
 
     @Override
     public String toString() {
-        return "WebElement " + element + "from " + parentLazyEntity;
+        return "WebElement " + element + "from " + parentLazyEntity.toString();
     }
 }

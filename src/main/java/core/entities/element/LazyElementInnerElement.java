@@ -22,6 +22,6 @@ public class LazyElementInnerElement extends AbstractLazyElement {
 
     @Override
     public String toString() {
-        return parentLazyElement + "\ninner located: " + innerLocator;
+        return parentLazyElement.toString() + "\ninner located: " + innerLocator;
     }
 }

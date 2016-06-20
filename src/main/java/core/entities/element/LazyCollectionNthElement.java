@@ -26,6 +26,6 @@ public class LazyCollectionNthElement extends AbstractLazyElement {
 
     @Override
     public String toString() {
-        return parentLazyCollection + "\nby index: " + index;
+        return parentLazyCollection.toString() + "\nby index: " + index;
     }
 }
